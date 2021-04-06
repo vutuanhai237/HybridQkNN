@@ -56,17 +56,24 @@ def cswaptest(vector1, vector2):
     answer = results.get_counts()
     return np.sqrt((answer["0"] - answer["1"]) / shots)
 
+def fidelity(vector1, vector2):
+    fidelities = np.array([])
+    for i in range(0, 1000):
+        fidelity = cswaptest(vector1, vector2)
+        fidelities = np.append(fidelities, fidelity)
+    return np.average(fidelities)
+
 # testing
 
 fidelities = np.array([])
 expected_results = np.array([])
 deltas = np.array([])
 
-vector1 = np.asarray([1,2])
-vector2 = np.asarray([3,2])
+vector1 = np.asarray([1,2,3,4,5,6,7,8])
+vector2 = np.asarray([3,2,1,3,4,2,4,2])
 vector1 = vector1 / np.linalg.norm(vector1)
 vector2 = vector2 / np.linalg.norm(vector2)
-for i in range(0, 5000):
+for i in range(0, 10):
 
     fidelity = cswaptest(vector1, vector2)
     expected_result = np.dot(vector1, vector2)

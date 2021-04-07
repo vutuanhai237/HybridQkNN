@@ -35,10 +35,14 @@ def predict(train_datas, train_labels, test_datas, k):
     """
     predict_labels = []
     for test_data in test_datas:
+        print('---')
         xs = distances(test_data, train_datas)
         indices_of_sorted_xs = sort_but_return_index(xs)
         labels = get_sublist_with_indices(train_labels, indices_of_sorted_xs, k)
         predict_labels.append(major_vote(labels))
+        print('xs: ', xs)
+        print('indices_of_sorted_xs: ', indices_of_sorted_xs)
+        print('labels: ', labels)
     return predict_labels
     
 

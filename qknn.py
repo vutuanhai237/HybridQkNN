@@ -11,8 +11,8 @@ from knn import encode, predict, bench_mark
 import itertools 
 
 n_variables = 4 
-n_train_points = 64 
-n_test_points = int(n_train_points*2/3)
+n_train_points = 8 
+n_test_points = int(n_train_points*0.3)
 k = 3
 iteration = 10
 # use iris dataset
@@ -52,15 +52,15 @@ colours = {0:'orange', 1:'yellow', 2:'violet'}
 colours2 = {0:'red', 1:'green', 2:'blue'}
 
 
-for i in range(len(train_datas)):
-    plt.scatter(train_datas[i][0], train_datas[i][1], color = colours[train_labels[i]])
-for i in range(len(test_datas)):
-    plt.scatter(test_datas[i][0], test_datas[i][1], color = colours2[test_labels[i]])
-plt.title('Iris')
-plt.xlabel('petal length')
-plt.ylabel('petal width')
-plt.grid(True)
-plt.show()
+# for i in range(len(train_datas)):
+#     plt.scatter(train_datas[i][0], train_datas[i][1], color = colours[train_labels[i]])
+# for i in range(len(test_datas)):
+#     plt.scatter(test_datas[i][0], test_datas[i][1], color = colours2[test_labels[i]])
+# plt.title('Iris')
+# plt.xlabel('petal length')
+# plt.ylabel('petal width')
+# plt.grid(True)
+# plt.show()
 
 print(train_datas)
 print(train_labels)

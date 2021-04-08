@@ -54,11 +54,14 @@ def cswaptest(vector1, vector2):
     qobj = assemble(circuit, qasm_sim, shots=shots)
     results = qasm_sim.run(qobj).result()
     answer = results.get_counts()
-    return np.sqrt((answer["0"] - answer["1"]) / shots)
+    if answer.get("1") is not None:
+        return np.sqrt(np.abs((answer["0"] - answer["1"]) / shots))
+    else:
+        return 1
 
-def fidelity(vector1, vector2):
+def fidelity(vector1, vector2, iteration):
     fidelities = np.array([])
-    for i in range(0, 100):
+    for i in range(0, iteration):
         fidelity = cswaptest(vector1, vector2)
         fidelities = np.append(fidelities, fidelity)
     return np.average(fidelities)
@@ -87,4 +90,3 @@ def fidelity(vector1, vector2):
 # print("Result: ", average)
 # print("Delta: ",average_delta)
 # print("Percent: " + str(average_delta/average*100) + "%" )
-

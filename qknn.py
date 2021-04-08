@@ -11,7 +11,7 @@ from knn import encode, predict, bench_mark
 import itertools 
 
 n_variables = 4 
-n_train_points = 8 
+n_train_points = 128 
 n_test_points = int(n_train_points*0.3)
 k = 3
 iteration = 10
@@ -34,7 +34,7 @@ n_test = n_test_points
 indicsTest = []
 while n_test != 0:
     random = (rd.sample(range(0, 150), 1))[0]
-    if random not in indicsTrain:
+    if random not in indicsTrain and random not in indicsTest:
         indicsTest.append(random)
         n_test = n_test - 1
 print(indicsTest)

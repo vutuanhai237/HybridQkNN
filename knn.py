@@ -56,7 +56,7 @@ def predict(train_datas, train_labels, test_datas, k, iteration):
         labels = get_sublist_with_indices(train_labels, indices_of_sorted_xs, k)
         predict_labels.append(major_vote(labels))
         i = i + 1
-        print(str(i/num_of_test_datas*100) + '%')
+        print(str(int(i/num_of_test_datas*100)) + '%')
         # print('xs: ', xs)
         # print('indices_of_sorted_xs: ', indices_of_sorted_xs)
         # print('labels: ', labels)

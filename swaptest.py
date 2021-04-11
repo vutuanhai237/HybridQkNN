@@ -47,7 +47,8 @@ def cswaptest(vector1, vector2):
         circuit.cswap(0, cs1[i], cs2[i])
     circuit.h(0)
     circuit.measure(0,0)
-    #print(circuit.draw())
+    
+    # visualization.circuit_drawer(circuit, filename="images/encode_swaptest/encode16", output='mpl', style={'backgroundcolor': '#FFFFFF'})
 
     shots = 16384
     qasm_sim = Aer.get_backend('qasm_simulator')
@@ -72,10 +73,11 @@ def fidelity(vector1, vector2, iteration):
 # expected_results = np.array([])
 # deltas = np.array([])
 
-# vector1 = np.asarray([1,2,3,4,5,6,7,8])
-# vector2 = np.asarray([3,2,1,3,4,2,4,2])
+# vector1 = np.asarray([1,2,3,4,5,6,7,8,1,2,3,4,5,6,7,8])
+# vector2 = np.asarray([3,2,1,3,4,2,4,2,3,2,1,3,4,2,4,2])
 # vector1 = vector1 / np.linalg.norm(vector1)
 # vector2 = vector2 / np.linalg.norm(vector2)
+# cswaptest(vector1, vector2)
 # for i in range(0, 10):
 
 #     fidelity = cswaptest(vector1, vector2)

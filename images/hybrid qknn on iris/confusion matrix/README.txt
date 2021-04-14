@@ -1,0 +1,1 @@
+16 - 1 means that this confusion matrix has 16 training states and 1 nearest neighbor

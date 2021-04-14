@@ -6,30 +6,33 @@ import qiskit as qk
 import random as rd
 from matplotlib import pyplot as plt
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, confusion_matrix
-
+import matplotlib.pyplot as plt
+from matplotlib.lines import Line2D
 from knn import encode, predict, bench_mark
 import itertools 
 
+# hyperparameters
 n_variables = 4 
-n_train_points = 128 
+n_train_points = 8
 n_test_points = int(n_train_points*0.3)
-k = 5
+k = 1
 iteration = 10
+
 # use iris dataset
 iris = datasets.load_iris()
 labels = iris.target
 data_raw = iris.data
+
 # encode data
 data_raw = encode(data_raw[:, :n_variables])
 
-
+# get training indices
 randomIndices0 = rd.sample(range(0, 50), int(n_train_points/3))
 randomIndices1 = rd.sample(range(55, 100), int(n_train_points/3))
 randomIndices2 = rd.sample(range(105, 150), n_train_points-int(n_train_points/3)*2)
-
 indicsTrain = list(itertools.chain(randomIndices0, randomIndices1, randomIndices2))
 
-print(indicsTrain)
+# get test indices
 n_test = n_test_points
 indicsTest = []
 while n_test != 0:
@@ -37,40 +40,42 @@ while n_test != 0:
     if random not in indicsTest:
         indicsTest.append(random)
         n_test = n_test - 1
-print(indicsTest)
-# now pick these indices from the data
+
+# pick these state and its labels with given indices
 train_datas = np.asarray([data_raw[i] for i in indicsTrain])
 train_labels =  np.asarray([labels[i] for i in indicsTrain])
-
 test_datas = np.asarray([data_raw[i] for i in indicsTest])
 test_labels =  np.asarray([labels[i] for i in indicsTest])
 
-import matplotlib.pyplot as plt
+# plot data
+train_colors = {0:'red', 1:'yellow', 2:'violet'}
+test_colors = {0:'orange', 1:'gold', 2:'pink'}
+fig, ax = plt.subplots()
+for i in range(len(train_datas)):
+    ax.scatter(train_datas[i][0], train_datas[i][1], color = train_colors[train_labels[i]])
+for i in range(len(test_datas)):
+    ax.scatter(test_datas[i][0], test_datas[i][1], color = test_colors[test_labels[i]])
+legend_elements = [
+    Line2D([0], [0], marker='o', color='w', label='Setosa (train)',  markerfacecolor='red', markersize=10),
+    Line2D([0], [0], marker='o', color='w', label='Setosa (test)',  markerfacecolor='orange', markersize=10),
+    Line2D([0], [0], marker='o', color='w', label='Versicolor (train)',  markerfacecolor='yellow', markersize=10),
+    Line2D([0], [0], marker='o', color='w', label='Versicolor (test)',  markerfacecolor='gold', markersize=10),
+    Line2D([0], [0], marker='o', color='w', label='Virginica (train)',  markerfacecolor='violet', markersize=10),
+    Line2D([0], [0], marker='o', color='w', label='Virginica (test)',  markerfacecolor='pink', markersize=10),
 
-colours = {0:'orange', 1:'yellow', 2:'violet'}
+]
+ax.legend(handles=legend_elements)
+plt.title('Iris')
+plt.xlabel('Petal length')
+plt.ylabel('Petal width')
+plt.grid(True)
+plt.show()
 
-colours2 = {0:'red', 1:'green', 2:'blue'}
-
-
-# for i in range(len(train_datas)):
-#     plt.scatter(train_datas[i][0], train_datas[i][1], color = colours[train_labels[i]])
-# for i in range(len(test_datas)):
-#     plt.scatter(test_datas[i][0], test_datas[i][1], color = colours2[test_labels[i]])
-# plt.title('Iris')
-# plt.xlabel('petal length')
-# plt.ylabel('petal width')
-# plt.grid(True)
-# plt.show()
-
-print(train_datas)
-print(train_labels)
-print(test_datas)
-print('Test labels: ', test_labels)
-
+# run QkNN
 predict = np.asarray(predict(train_datas, train_labels, test_datas, k, iteration))
-print('Predict labels: ', predict)
-
 accuracy, precision, recall, matrix = bench_mark(test_labels, predict)
+print('Predict labels: ', predict)
+print('Test labels: ', test_labels)
 print('accuracy: ', accuracy)
 print('precision: ', precision)
 print('recall: ', recall)

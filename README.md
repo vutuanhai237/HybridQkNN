@@ -49,6 +49,24 @@ Confusion matrix
 
 ![](images/confusion_matrix.png?raw=true)
 
+# How to run code?
+
+Package: Qiskit
+
+Function of files:
+
+- draw_circuit.py, plot_param.ipynb, test_integrated_swap_test.ipynb, test_state_preparation.ipynb: for generated these images which you have seen above.
+
+- pure_knn.py: run kNN classifer that provided from sklearn.
+
+- encoding.py: create circuit in [18] and can be used in the integrated swap test circuit.
+
+- swaptest.py: create and run integrated swap test circuit.
+
+- knn.py: do classical task in the origin kNN
+
+- qknn.py: call functions from knn.py and swaptest.py, load dataset Iris and excute method predict().
+
 
 # References
 

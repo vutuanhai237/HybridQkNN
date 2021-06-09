@@ -1,4 +1,6 @@
-# Hybrid QkNN
+# Hybrid Quantum k - nearest neighbors (Hybrid QkNN)
+
+[Summary video](https://youtu.be/MhZNExt88A0)
 
 This algorithm use both quantum and classical quantum to run steps like in kNN. Specially, it use a new design circuit that I called Integrated swap test circuit.
 

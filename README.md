@@ -4,13 +4,13 @@
 
 This algorithm use both quantum and classical quantum to run steps like in kNN. Specially, it use a new design circuit that I called Integrated swap test circuit.
 
-![](images/algorithm.png?raw=true)
+<img src="materials/algorithm.png?raw=true" alt="" width="800"/>
 
-# Integrated swap test circuit
+# 1. Integrated swap test (isc) circuit
 
 Swap test is a procedure in quantum computing which you can see its circuit below:
 
-![](images/swap_test_circuit.png?raw=true)
+<img src="materials/swap_test_circuit.png?raw=true" alt="" width="800"/>
 
 Because of simplicity, it can only calculate the fidelity between two 1 - qubit (or 2 - dimensional states). When you want to apply it in real life (4,8,16,... - dimensional state), swap test must be more complex. There are two problem that new version of swap test has:
 
@@ -20,16 +20,16 @@ Because of simplicity, it can only calculate the fidelity between two 1 - qubit 
 So this is our new idea:
 
 *For calculate the fidelity between 2 - dimensional states.*
-![](images/integrated_swap_test/2-dimensional.png?raw=true)
+<img src="materials/integrated_swap_test/2-dimensional.png?raw=true" alt="" width="800"/>
 
 *For calculate the fidelity between 4 - dimensional states.*
-![](images/integrated_swap_test/4-dimensional.png?raw=true)
+<img src="materials/integrated_swap_test/4-dimensional.png?raw=true" alt="" width="800"/>
 
 *For calculate the fidelity between 8 - dimensional states.*
-![](images/integrated_swap_test/8-dimensional.png?raw=true)
+<img src="materials/integrated_swap_test/8-dimensional.png?raw=true" alt="" width="800"/>
 
 *For calculate the fidelity between 16 - dimensional states.*
-![](images/integrated_swap_test/16-dimensional.png?raw=true)
+<img src="materials/integrated_swap_test/16-dimensional.png?raw=true" alt="" width="800"/>
 
 Don't scare when our circuit uses 2(N - 1) + 1 qubits, ancilla took up 2(N - 1) + 1 - 2log2(N) - 1 = 2(N - 1 - log2(N)). Details on this circuit explained in our paper which will be publish soon. A parts of it is from [this code](https://github.com/adjs/dcsp) [18]
 
@@ -37,7 +37,7 @@ Don't scare when our circuit uses 2(N - 1) + 1 qubits, ancilla took up 2(N - 1) 
 
 ### 1. On ingrated swap test circuit
 
-![](images/se_re.png?raw=true)
+<img src="materials/se-re.png?raw=true" alt="" width="800"/>
 
 Standard error and relative error when use this circuit to calculate fidelity between two states.
 
@@ -45,11 +45,11 @@ Standard error and relative error when use this circuit to calculate fidelity be
 
 Accuracy
 
-![](images/accuracy.png?raw=true)
+<img src="materials/accuracy.png?raw=true" alt="" width="800"/>
 
 Confusion matrix
 
-![](images/confusion_matrix.png?raw=true)
+<img src="materials/confusion_matrix.png?raw=true" alt="" width="800"/>
 
 # How to run code?
 
@@ -57,18 +57,19 @@ Package: Qiskit
 
 Function of files:
 
-- draw_circuit.py, plot_param.ipynb, test_integrated_swap_test.ipynb, test_state_preparation.ipynb: for generated these images which you have seen above.
+- base:
 
-- pure_knn.py: run kNN classifer that provided from sklearn.
+  - encoding.py: create circuit in [18] and can be used in the integrated swap test circuit.
 
-- encoding.py: create circuit in [18] and can be used in the integrated swap test circuit.
+  - swaptest.py: create and run isc (integrated swap test) circuit.
 
-- swaptest.py: create and run integrated swap test circuit.
+  - knn.py: do classical task in the origin kNN
 
-- knn.py: do classical task in the origin kNN
+- juyter:
 
-- qknn.py: call functions from knn.py and swaptest.py, load dataset Iris and excute method predict().
+  - qknn.ipynb: call functions from knn.py and swaptest.py, load dataset Iris and excute method predict().
 
+  - knn.ipynb: run kNN classifer that provided from sklearn.
 
 # References
 

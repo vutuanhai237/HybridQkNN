@@ -4,7 +4,6 @@ function to load classical data in a quantum device
 
 import numpy as np
 import qiskit
-from qiskit.converters.circuit_to_dag import circuit_to_dag
 
 class bin_tree:
     size = None

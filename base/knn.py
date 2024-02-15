@@ -1,6 +1,6 @@
 import numpy as np
-import collections, base.swaptest, sklearn
-
+import collections, base.swaptest
+import sklearn.metrics
 def encode(xss):
     """Convert normal vector to normalized state
 

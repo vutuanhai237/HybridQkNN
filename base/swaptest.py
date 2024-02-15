@@ -48,11 +48,9 @@ def create_integrated_swap_test_circuit(vector1, vector2):
 
 def integrated_swap_test_circuit(vector1, vector2):
     """Return fidelity between two same - dimension vectors by cswaptest
-
     Args:
         - vector1 (numpy array): First vector, don't need to normalize
         - vector2 (numpy array): Second vector, don't need to normalize
-
     Returns:
         - float: Fidelity = sqrt((p(0) - p(1)) / n_shot)
     """
@@ -61,9 +59,10 @@ def integrated_swap_test_circuit(vector1, vector2):
     vector1 = vector1 / np.linalg.norm(vector1)
     vector2 = vector2 / np.linalg.norm(vector1)
     qc = create_integrated_swap_test_circuit(vector1, vector2)
-    counts = qiskit.execute(qc, backend = qiskit.Aer.get_backend('qasm_simulator'), shots = base.constant.num_shots).result().get_counts()
+    counts = qiskit.execute(qc, 
+                            backend = qiskit.Aer.get_backend('qasm_simulator'), 
+                            shots = base.constant.num_shots).result().get_counts()
     return np.sqrt(np.abs((counts.get("0", 0) - counts.get("1", 0)) / base.constant.num_shots))
-
 
 def get_fidelity(vector1, vector2, iteration: int = 1):
     """Run ist circuit many times
